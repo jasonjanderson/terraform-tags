@@ -1,0 +1,7 @@
+### Terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+
+### JetBrains
+.idea/
