@@ -17,10 +17,12 @@ variable "os_version" {
 
 variable "application" {
   description = "If applicable, the name of the application or service baked into the AMI. Examples: Solr, RabbitMQ, IIS"
+  default = "UNCATEGORIZED"
 }
 
 variable "application_version" {
   description = "If applicable, the version of the application or service baked into the AMI. Examples: 5.41, 19.1, 2017.5.19"
+  default = "UNCATEGORIZED"
 }
 
 # Main
