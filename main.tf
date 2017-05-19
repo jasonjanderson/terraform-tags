@@ -15,8 +15,12 @@ variable "lifespan" {
   description = "The intended lifespan of the resource. \n Acceptable Values: \n temporary - Can be destroyed after use or testing \n permanent - Cannot be destroyed \n businesshours - Only in use during normal business hours (8:00AM - 6:00PM) and can be shutdown / scaled down / destroyed during off-hours."
 }
 
+variable "owner_email" {
+  description = "Email address of the person or team who owns the resource"
+}
+
 variable "business_unit" {
-  description = "Name of the business unit the resource should be associated with. Populates the 'Business Unit' tag"
+  description = "Name of the business unit the resource should be associated with. Populates the 'BusinessUnit' tag"
   default = "UNCATEGORIZED"
 }
 
@@ -26,7 +30,7 @@ variable "customer" {
 }
 
 # Main
-
+data "aws_caller_identity" "current" { }
 
 # Outputs
 output "tags" {
@@ -35,7 +39,9 @@ output "tags" {
     Environment = "${var.environment}",
     Role = "${var.role}",
     Lifespan = "${var.lifespan}",
-    "Business Unit" = "${var.business_unit}",
+    OwnerEmail = "${var.owner_email}"
+    BusinessUnit = "${var.business_unit}",
     Customer = "${var.customer}"
+    CreatorARN = "${data.aws_caller_identity.current.arn}"
   }
 }
